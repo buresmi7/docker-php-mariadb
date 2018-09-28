@@ -1,0 +1,25 @@
+{
+  "name": "docker-php-mariadb",
+  "version": "1.0.0",
+  "description": "Docker compose with PHP and database",
+  "main": "README.md",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "cross-env SOURCE_DIR='./test' DOMAIN=pokus.local DATABASE_INIT_FILE='./test/data.sql' docker-compose up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buresmi7/docker-php-mariadb.git"
+  },
+  "author": "Michal Bureš",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buresmi7/docker-php-mariadb/issues"
+  },
+  "homepage": "https://github.com/buresmi7/docker-php-mariadb#readme",
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  }
+}

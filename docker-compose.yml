@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  php-fpm:
+    build:
+      context: ./php-fpm
+    volumes:
+      - $SOURCE_DIR:/var/www
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - $SOURCE_DIR:/var/www
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites/:/etc/nginx/sites-available
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+    environment:
+      SERVER_NAME: $DOMAIN
+    depends_on:
+      - php-fpm
+    ports:
+      - "80:80"
+      - "443:443"
+  database:
+    build:
+      context: ./database
+    environment:
+      - MYSQL_DATABASE=mydb
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=docker
+    volumes:
+      - $DATABASE_INIT_FILE:/docker-entrypoint-initdb.d/data.sql
